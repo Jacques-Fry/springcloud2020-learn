@@ -1,0 +1,29 @@
+server:
+  port: 80
+
+eureka:
+  client:
+    #表示是否将自己注册进EurekaServer 默认是true
+    register-with-eureka: true
+    #是否将EurekaServer抓取已有的注册信息,默认是true,单节点无所谓,但集群必须设置为true才能配和ribbon使用均衡负债
+    fetch-registry: true
+    service-url:
+      #Eureka注册地址
+      #defaultZone: http://localhost:7001/eureka
+      #集群环境
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+
+spring:
+  application:
+    name: cloud-consumer-order
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud2020?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+
+mybatis-plus:
+  configuration-properties:
+    type-aliases-package: com.jacques.springcloud.entity
+    mapper-locations: classpath:mapper/*.xml
