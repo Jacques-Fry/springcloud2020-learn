@@ -7,9 +7,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Jacques·Fry
@@ -76,5 +79,25 @@ public class PaymentController {
         } else {
             return new Result<>(5000, "没有对应的记录,服务端口: "+serverPort, null);
         }
+    }
+
+    /**
+     * 服务发现
+     */
+    @Resource
+    private DiscoveryClient discoveryClient;
+
+    @ApiOperation("获取所有的微服务")
+    @GetMapping("/getServices")
+    public Object getServices(){
+        List<String> services = discoveryClient.getServices();
+        for (String item:services) {
+            log.info("**item: {}",item);
+        }
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        for (ServiceInstance instance:instances) {
+            log.info("{}\t{}\t{}\t{}",instance.getInstanceId(),instance.getHost(),instance.getPort(),instance.getUri());
+        }
+        return this.discoveryClient;
     }
 }
