@@ -1,6 +1,5 @@
 package com.jacques.springcloud.config;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +15,7 @@ public class ApplicationContextConfig {
     /**
      * 开启轮询均衡负载
      */
-    @LoadBalanced
+    //@LoadBalanced
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
