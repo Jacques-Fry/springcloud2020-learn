@@ -38,7 +38,7 @@ public class OrderController {
     }
 
     @ApiOperation("查询支付信息")
-    @PostMapping("/getPayment/{id}")
+    @GetMapping("/getPayment/{id}")
     public Result<Payment> add(@PathVariable long id){
         return restTemplate.getForObject(PAYMENT_URL+"/payment/get/"+id,Result.class);
     }

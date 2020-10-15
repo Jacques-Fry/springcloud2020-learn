@@ -2,10 +2,11 @@ package com.jacques.springcloud.controller;
 
 import com.jacques.springcloud.entity.Payment;
 import com.jacques.springcloud.entity.Result;
+import com.jacques.springcloud.service.PaymentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
@@ -19,27 +20,24 @@ import javax.annotation.Resource;
 @Api(tags = "订单模块")
 @RequestMapping("/order")
 @RestController
+@Slf4j
 public class OrderController {
 
-    //单机版
-    //public static final String PAYMENT_URL="http://127.0.0.1:8001";
-    /**
-     * 集群版
-     */
-    public static final String PAYMENT_URL="http://cloud-payment-service";
-
     @Resource
-    private RestTemplate restTemplate;
+    private PaymentService paymentService;
 
     @ApiOperation("添加支付信息")
     @PostMapping("/addPayment")
     public Result<Payment> add(@RequestBody Payment payment){
-        return restTemplate.postForObject(PAYMENT_URL+"/payment/add",payment,Result.class);
+        return paymentService.add(payment);
     }
 
     @ApiOperation("查询支付信息")
     @GetMapping("/getPayment/{id}")
-    public Result<Payment> add(@PathVariable long id){
-        return restTemplate.getForObject(PAYMENT_URL+"/payment/get/"+id,Result.class);
+    public Result<Payment> get(@PathVariable long id){
+        return paymentService.get(id);
     }
+
+
+
 }

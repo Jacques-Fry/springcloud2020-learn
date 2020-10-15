@@ -52,13 +52,13 @@ public class OrderController {
     }
 
     @ApiOperation("查询支付信息")
-    @PostMapping("/getPayment/{id}")
+    @GetMapping("/getPayment/{id}")
     public Result<Payment> get(@PathVariable long id){
         return restTemplate.getForObject(PAYMENT_URL+"/payment/get/"+id,Result.class);
     }
 
     @ApiOperation("自定义轮询算法 查询支付信息 getForEntity")
-    @PostMapping("/getPayment/getForEntity/{id}")
+    @GetMapping("/getPayment/getForEntity/{id}")
     public Result<Payment> getForEntity(@PathVariable long id){
 
         List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
