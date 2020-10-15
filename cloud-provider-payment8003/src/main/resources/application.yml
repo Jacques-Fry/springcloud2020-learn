@@ -14,7 +14,6 @@ spring:
     zookeeper:
       connect-string: 47.94.245.17:2181
 
-
 mybatis-plus:
   configuration-properties:
     type-aliases-package: com.jacques.springcloud.entity
