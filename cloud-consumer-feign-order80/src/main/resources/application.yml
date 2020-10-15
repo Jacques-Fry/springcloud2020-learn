@@ -1,6 +1,10 @@
 server:
   port: 80
 
+spring:
+  application:
+    name: cloud-consumer-feign-order
+
 eureka:
   client:
     #表示是否将自己注册进EurekaServer 默认是true
@@ -20,6 +24,7 @@ ribbon:
   #连接所需时间,适用于网络状况正常的情况下两端连接所需要的时间
   ConnectTimeout: 5000
 
-spring:
-  application:
-    name: cloud-consumer-feign-order
+logging:
+  level:
+    # feign日志以什么级别监控哪个接口
+    com.jacques.springcloud.service.PaymentService: debug

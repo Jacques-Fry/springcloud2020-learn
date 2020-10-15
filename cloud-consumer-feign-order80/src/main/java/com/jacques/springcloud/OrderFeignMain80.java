@@ -8,7 +8,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 /**
  * @author Jacques·Fry
  * @version 1.0
- * @date 2020/10/14 23:16
+ * @info 文件信息
+ * @note 文件说明
+ * @date 2020/10/16 2:47
  */
 @EnableFeignClients
 @EnableEurekaClient
@@ -18,3 +20,4 @@ public class OrderFeignMain80 {
         SpringApplication.run(OrderFeignMain80.class);
     }
 }
+
