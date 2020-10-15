@@ -28,16 +28,24 @@ public class OrderController {
 
     @ApiOperation("添加支付信息")
     @PostMapping("/addPayment")
-    public Result<Payment> add(@RequestBody Payment payment){
+    public Result<Payment> add(@RequestBody Payment payment) {
         return paymentService.add(payment);
     }
 
     @ApiOperation("查询支付信息")
     @GetMapping("/getPayment/{id}")
-    public Result<Payment> get(@PathVariable long id){
+    public Result<Payment> get(@PathVariable long id) {
         return paymentService.get(id);
     }
 
+    /**
+     * 模拟feign超时
+     */
+    @ApiOperation("模拟feign超时")
+    @GetMapping("/feign/timeout")
+    public String feignTimeOut() {
+        return paymentService.feignTimeOut();
+    }
 
 
 }

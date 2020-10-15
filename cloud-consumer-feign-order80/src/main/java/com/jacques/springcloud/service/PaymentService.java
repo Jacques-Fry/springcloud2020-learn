@@ -22,5 +22,8 @@ public interface PaymentService {
     Result<Payment> add(Payment payment);
 
     @GetMapping("/payment/get/{id}")
-    Result<Payment> get(@PathVariable("id") long id);
+    Result<Payment> get(@PathVariable(value = "id") long id);
+
+    @GetMapping("/payment/feign/timeout")
+    String feignTimeOut();
 }
