@@ -1,5 +1,6 @@
 package com.jacques.springcloud;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -7,12 +8,15 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * @author Jacques·Fry
  * @version 1.0
- * @date 2020/10/14 23:16
+ * @info springboot启动类
+ * @note 文件说明
+ * @date 2020/10/14 22:01
  */
 @EnableDiscoveryClient
+@MapperScan(value = "com.jacques.springcloud.dao")
 @SpringBootApplication
-public class OrderZkMain80 {
+public class PaymentMain8005 {
     public static void main(String[] args) {
-        SpringApplication.run(OrderZkMain80.class);
+        SpringApplication.run(PaymentMain8005.class);
     }
 }
