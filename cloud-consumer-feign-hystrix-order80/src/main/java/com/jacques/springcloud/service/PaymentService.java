@@ -2,6 +2,7 @@ package com.jacques.springcloud.service;
 
 import com.jacques.springcloud.entity.Payment;
 import com.jacques.springcloud.entity.Result;
+import com.jacques.springcloud.service.impl.PaymentFullbackServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @date 2020/10/16 1:38
  */
 @Component
-@FeignClient("CLOUD-PAYMENT-SERVICE")
+@FeignClient(value = "CLOUD-PAYMENT-SERVICE",fallback = PaymentFullbackServiceImpl.class)
 public interface PaymentService {
 
     @PostMapping("/payment/add")
@@ -23,9 +24,6 @@ public interface PaymentService {
 
     @GetMapping("/payment/get/{id}")
     Result<Payment> get(@PathVariable(value = "id") long id);
-
-    @GetMapping("/payment/feign/timeout")
-    String feignTimeOut();
 
     @GetMapping("/payment/hystrix/timeout/{id}")
     Result<String> hystrixTimeOut(@PathVariable("id") Integer id);

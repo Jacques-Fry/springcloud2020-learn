@@ -3,6 +3,7 @@ package com.jacques.springcloud.controller;
 import com.jacques.springcloud.entity.Payment;
 import com.jacques.springcloud.entity.Result;
 import com.jacques.springcloud.service.PaymentService;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import io.swagger.annotations.Api;
@@ -12,6 +13,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+@Api(tags = "订单模块")
+@RequestMapping("/order")
+@RestController
+@Slf4j
+/**
+ * 全局Fullback
+ */
+@DefaultProperties(defaultFallback = "orderGlobalFullbackMethod")
 /**
  * @author Jacques·Fry
  * @version 1.0
@@ -19,10 +28,6 @@ import javax.annotation.Resource;
  * @note 文件说明
  * @date 2020/10/14 23:18
  */
-@Api(tags = "订单模块")
-@RequestMapping("/order")
-@RestController
-@Slf4j
 public class OrderHystrixController {
 
     @Resource
@@ -40,14 +45,6 @@ public class OrderHystrixController {
         return paymentService.get(id);
     }
 
-    /**
-     * 模拟feign超时
-     */
-    @ApiOperation("模拟feign超时")
-    @GetMapping("/feign/timeout")
-    public String feignTimeOut() {
-        return paymentService.feignTimeOut();
-    }
 
     /**
      * 模拟hystrix超时
@@ -70,10 +67,18 @@ public class OrderHystrixController {
     /**
      * 模拟服务错误
      */
+    @HystrixCommand
     @ApiOperation("模拟服务错误")
     @GetMapping("/error")
     public Result<String> error(){
         return paymentService.error();
     }
 
+    /**
+     * 全局fullback函数
+     * @return
+     */
+    public Result<String> orderGlobalFullbackMethod(){
+        return new Result<>(5000,"Global异常处理信息: 服务繁忙或系统错误,请稍后重试");
+    }
 }

@@ -82,7 +82,7 @@ public class PaymentServiceImpl implements PaymentService {
     })
     @Override
     public String hystrixTimeout(Integer id) {
-        int seconds =3;
+        int seconds =2;
         try {
             TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {
