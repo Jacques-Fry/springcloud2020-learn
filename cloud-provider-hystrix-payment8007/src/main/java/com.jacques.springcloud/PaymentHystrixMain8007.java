@@ -8,17 +8,20 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
- * @author Jacques·Fry
- * @version 1.0
- * @info springboot启动类
- * @note 文件说明
- * @date 2020/10/14 22:01
+ * 开启断路器
  */
 @EnableCircuitBreaker
 @EnableDiscoveryClient
 @EnableEurekaClient
 @MapperScan(value = "com.jacques.springcloud.dao")
 @SpringBootApplication
+/**
+ * @author Jacques·Fry
+ * @version 1.0
+ * @info springboot启动类
+ * @note 文件说明
+ * @date 2020/10/14 22:01
+ */
 public class PaymentHystrixMain8007 {
     public static void main(String[] args) {
         SpringApplication.run(PaymentHystrixMain8007.class);

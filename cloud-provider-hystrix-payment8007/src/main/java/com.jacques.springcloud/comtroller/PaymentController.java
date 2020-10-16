@@ -4,6 +4,7 @@ import com.jacques.springcloud.entity.Payment;
 import com.jacques.springcloud.entity.Result;
 import com.jacques.springcloud.service.PaymentService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -131,6 +132,16 @@ public class PaymentController {
     @GetMapping("/payment/error")
     public Result<String> error(){
         return new Result<>(200,paymentService.error());
+    }
+
+    /**
+     * 模拟服务熔断
+     */
+    @ApiImplicitParam(name = "id",value = "ID小于0触发错误")
+    @ApiOperation("模拟服务熔断")
+    @GetMapping("/payment/circuitBreaker")
+    public Result<String> paymentCircuitBreaker(Integer id){
+        return new Result<>(200,paymentService.paymentCircuitBreaker(id));
     }
 
 }
