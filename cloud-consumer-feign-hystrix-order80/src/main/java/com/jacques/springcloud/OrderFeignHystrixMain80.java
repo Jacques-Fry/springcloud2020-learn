@@ -11,6 +11,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @version 1.0
  * @date 2020/10/16 2:47
  */
+
+/**
+ * 开启服务降级
+ */
 @EnableHystrix
 @EnableFeignClients
 @EnableEurekaClient
