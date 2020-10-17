@@ -14,9 +14,22 @@ spring:
             -springcloud2020-config
       #读取分支
       label: master
+  # rabbitMQ配置
+  rabbitmq:
+    host: 47.94.245.17
+    port: 5672
+    username: test
+    password: test
 
-#注册服务到eureka地址
+# 注册服务到eureka地址
 eureka:
   client:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka
+
+# 暴露bus端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
