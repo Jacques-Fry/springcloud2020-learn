@@ -28,8 +28,8 @@ spring:
           predicates:
             # 断言,路径相匹配后输出
             - Path=/order/**
-            # 时间条件
-            - After=2020-10-17T21:57:42.541+08:00[Asia/Shanghai]
+            # 时间过滤条件
+            #- After=2020-10-17T21:57:42.541+08:00[Asia/Shanghai]
             # cookie过滤条件 curl http://127.0.0.1:9527/order/getPayment/2 --cookie "username=jacques"
             #- Cookie=username,jacques
             # header过滤条件 curl http://127.0.0.1:9527/order/getPayment/2 --cookie "username=jacques" -H "token:2"
