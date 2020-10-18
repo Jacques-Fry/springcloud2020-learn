@@ -1,0 +1,21 @@
+server:
+  port: 90
+
+spring:
+  application:
+    name: nacos-order-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+# 放开管理权限
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# 消费者访问的服务名称(注册成功进nacos的微服务提供者)
+server-url:
+  nacos-payment-service: http://nacos-payment-service
