@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.jacques.springcloud.entity.Result;
+import com.jacques.springcloud.handler.CommonBlockHandlerException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,5 +39,12 @@ public class RateLimitController {
     @SentinelResource(value = "byUrl")
     public Result<String> byUrl(){
         return new Result<>(200,"按url限流测试OK "+ IdUtil.randomUUID() );
+    }
+
+    @ApiOperation("自定义限流错误提醒")
+    @GetMapping("/customErrorMsg")
+    @SentinelResource(value = "customErrorMsg",blockHandlerClass = CommonBlockHandlerException.class,blockHandler = "blockHandlerException")
+    public Result<String> customErrorMsg(){
+        return new Result<>(200,"自定义限流错误提醒 "+ IdUtil.randomUUID() );
     }
 }
