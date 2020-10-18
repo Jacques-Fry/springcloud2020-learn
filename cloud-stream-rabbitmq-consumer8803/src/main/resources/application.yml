@@ -1,5 +1,5 @@
 server:
-  port: 8802
+  port: 8803
 
 spring:
   application:
@@ -48,7 +48,7 @@ eureka:
       defaultZone: http://eureka7001.com:7001/eureka
   instance:
     #修改在eureka上显示的服务名称
-    instance-id: receiver8802
+    instance-id: receiver8803
     #访问路径是否显示ip地址
     prefer-ip-address: true
     #eureka向服务端发送心跳时间间隔,单位为秒 默认是30秒

@@ -20,7 +20,7 @@ spring:
                 port: 5672
                 username: test
                 password: test
-                virtual-host: /cloud-learn
+                virtual-host: /cloud_learn
       #服务整合处理
       bindings:
         # 这个名字是一个通道名字 output 消息接受
